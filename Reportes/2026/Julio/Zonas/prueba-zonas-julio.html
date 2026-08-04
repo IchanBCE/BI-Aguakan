@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prueba de Zonas</title>
+
+<!-- ============================================================
+     Otro dashboard de PRUEBA. Esta vez en categoría Zonas, mismo
+     mes que la prueba anterior (Julio 2026), para confirmar que
+     dos categorías distintas conviven bien dentro del mismo mes
+     en la página principal. Se puede borrar después.
+     ============================================================ -->
+
+<script type="application/json" id="meta">
+{
+  "titulo": "Prueba de Zonas",
+  "categoria": "Zonas",
+  "fecha": "2026-07-20",
+  "descripcion": "Segundo dashboard de prueba, para validar varias categorías en el mismo mes",
+  "tags": ["Prueba", "Zonas"]
+}
+</script>
+
+<style>
+  *{ box-sizing: border-box; }
+  body{
+    margin: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+    font-family: system-ui, sans-serif;
+    background: radial-gradient(circle at 50% 20%, #14608F, #0A1E4A 70%);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 20px;
+    position: relative;
+  }
+
+  h1{
+    font-size: clamp(28px, 5vw, 46px);
+    text-align: center;
+    margin: 0 0 6px;
+    letter-spacing: -0.01em;
+  }
+
+  p.sub{ opacity: .8; margin: 0 0 50px; text-align:center; }
+
+  /* --- radar circular con barrido giratorio --- */
+  .radar{
+    position: relative;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(94,234,251,0.08) 0%, rgba(94,234,251,0.02) 70%);
+    border: 2px solid rgba(94,234,251,0.35);
+    margin-bottom: 44px;
+  }
+
+  .radar::before, .radar::after{
+    content:"";
+    position:absolute;
+    border-radius:50%;
+    border: 1px solid rgba(94,234,251,0.25);
+  }
+  .radar::before{ inset: 30px; }
+  .radar::after{ inset: 80px; }
+
+  .barrido{
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, rgba(94,234,251,0.55), transparent 35%);
+    animation: girarRadar 3s linear infinite;
+  }
+
+  @keyframes girarRadar{
+    from{ transform: rotate(0deg); }
+    to{ transform: rotate(360deg); }
+  }
+
+  /* puntos que representan zonas detectadas, cada uno parpadea distinto */
+  .punto{
+    position:absolute;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: #5EEAFB;
+    box-shadow: 0 0 12px 3px rgba(94,234,251,0.7);
+    animation: parpadear 1.6s ease-in-out infinite;
+  }
+  @keyframes parpadear{
+    0%, 100%{ opacity: .25; transform: scale(0.8); }
+    50%{ opacity: 1; transform: scale(1.15); }
+  }
+
+  .p1{ top: 40px;  left: 70px;  animation-delay: 0s; }
+  .p2{ top: 120px; left: 210px; animation-delay: .5s; }
+  .p3{ top: 190px; left: 100px; animation-delay: 1s; }
+  .p4{ top: 90px;  left: 150px; animation-delay: 1.4s; }
+
+  /* --- barras de "cobertura por zona" creciendo y bajando --- */
+  .barras{
+    display:flex;
+    align-items:flex-end;
+    gap: 14px;
+    height: 90px;
+    margin-bottom: 40px;
+  }
+
+  .barra{
+    width: 20px;
+    border-radius: 6px 6px 0 0;
+    background: linear-gradient(180deg, #5EEAFB, #2E86AB);
+    animation: subirBajar 1.8s ease-in-out infinite;
+  }
+  .barra:nth-child(1){ animation-delay: 0s; }
+  .barra:nth-child(2){ animation-delay: .2s; }
+  .barra:nth-child(3){ animation-delay: .4s; }
+  .barra:nth-child(4){ animation-delay: .6s; }
+  .barra:nth-child(5){ animation-delay: .8s; }
+
+  @keyframes subirBajar{
+    0%, 100%{ height: 20%; }
+    50%{ height: 100%; }
+  }
+
+  footer{
+    font-size: 12px;
+    opacity: .6;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+  <h1>📡 Prueba de Zonas</h1>
+  <p class="sub">Segundo dashboard de prueba — julio 2026, categoría Zonas.</p>
+
+  <div class="radar">
+    <div class="barrido"></div>
+    <div class="punto p1"></div>
+    <div class="punto p2"></div>
+    <div class="punto p3"></div>
+    <div class="punto p4"></div>
+  </div>
+
+  <div class="barras">
+    <div class="barra"></div>
+    <div class="barra"></div>
+    <div class="barra"></div>
+    <div class="barra"></div>
+    <div class="barra"></div>
+  </div>
+
+  <footer>Este dashboard es solo de prueba — Julio 2026 · Zonas</footer>
+
+</body>
+</html>
