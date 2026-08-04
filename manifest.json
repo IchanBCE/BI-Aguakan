@@ -1,6 +1,6 @@
 {
-  "generado": "2026-08-04T22:39:06.275Z",
-  "total": 5,
+  "generado": "2026-08-04T22:54:00.321Z",
+  "total": 6,
   "dashboards": [
     {
       "titulo": "Convenios Agosto",
@@ -44,6 +44,17 @@
         "Zonas"
       ],
       "ruta": "Reportes/2026/Agosto/Zonas/zona-agosto.html"
+    },
+    {
+      "titulo": "Prueba de Zonas",
+      "categoria": "Zonas",
+      "fecha": "2026-07-20",
+      "descripcion": "Segundo dashboard de prueba, para validar varias categorías en el mismo mes",
+      "tags": [
+        "Prueba",
+        "Zonas"
+      ],
+      "ruta": "Reportes/2026/Julio/Zonas/prueba-zonas-julio.html"
     },
     {
       "titulo": "Prueba de Automatización",
