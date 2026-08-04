@@ -356,97 +356,166 @@
 
   <div class="month-select-wrap">
     <span class="label">Mes:</span>
-    <!-- Cada mes nuevo = una <option> más aquí. El value debe
-         coincidir con el id del .month-panel correspondiente. -->
-    <select class="month-select" id="month-picker">
-      <option value="agosto-2026">Agosto 2026</option>
-    </select>
+    <!-- Este <select> se llena solo con JavaScript, leyendo
+         manifest.json. Ya no se edita a mano. -->
+    <select class="month-select" id="month-picker"></select>
   </div>
 
-  <!-- ======= AGOSTO 2026 ======= -->
-  <div class="month-panel active" id="agosto-2026">
-
-    <div class="cat-block">
-      <div class="cat-heading">
-        <span class="dot" style="background:var(--cat-zonas)"></span>
-        Zonas
-        <span class="count">1 dashboard</span>
-      </div>
-      <a class="row" href="Reportes/2026/Agosto/Zonas/zona-agosto.html">
-        <span class="bullet" style="background:var(--cat-zonas)"></span>
-        <span class="row-text">
-          <span class="row-title">Dashboard de Zonas — Agosto</span>
-          <span class="row-desc">Cobranza y desempeño por zona</span>
-        </span>
-        <span class="row-arrow">↗</span>
-      </a>
-    </div>
-
-    <div class="cat-block">
-      <div class="cat-heading">
-        <span class="dot" style="background:var(--cat-saldos)"></span>
-        Saldos
-        <span class="count">1 dashboard</span>
-      </div>
-      <a class="row" href="Reportes/2026/Agosto/Saldos/saldos-agosto.html">
-        <span class="bullet" style="background:var(--cat-saldos)"></span>
-        <span class="row-text">
-          <span class="row-title">Dashboard de Saldos — Agosto</span>
-          <span class="row-desc">Estado de saldos y morosidad del mes</span>
-        </span>
-        <span class="row-arrow">↗</span>
-      </a>
-    </div>
-
-    <div class="cat-block">
-      <div class="cat-heading">
-        <span class="dot" style="background:var(--cat-convenios)"></span>
-        Convenios
-        <span class="count">1 dashboard</span>
-      </div>
-      <a class="row" href="Reportes/2026/Agosto/Convenios/convenios-agosto.html">
-        <span class="bullet" style="background:var(--cat-convenios)"></span>
-        <span class="row-text">
-          <span class="row-title">Dashboard de Convenios — Agosto</span>
-          <span class="row-desc">Seguimiento de convenios de pago activos</span>
-        </span>
-        <span class="row-arrow">↗</span>
-      </a>
-    </div>
-
-    <div class="cat-block">
-      <div class="cat-heading">
-        <span class="dot" style="background:var(--cat-varios)"></span>
-        Varios
-        <span class="count">1 dashboard</span>
-      </div>
-      <a class="row" href="Reportes/2026/Agosto/Varios/varios-agosto.html">
-        <span class="bullet" style="background:var(--cat-varios)"></span>
-        <span class="row-text">
-          <span class="row-title">Dashboard Varios — Agosto</span>
-          <span class="row-desc">Reportes generales del mes</span>
-        </span>
-        <span class="row-arrow">↗</span>
-      </a>
-    </div>
-
+  <!-- Aquí se inyecta el contenido de cada mes (generado por JS) -->
+  <div id="contenido-meses">
+    <p id="estado-carga" style="color:var(--text-muted); font-size:14px;">Cargando dashboards…</p>
   </div>
 
 </main>
 
-<footer class="site">BI-Aguakan · repositorio interno de dashboards</footer>
+<footer class="site">BI-Aguakan · repositorio interno de dashboards <span id="ultima-actualizacion"></span></footer>
 
 <script>
-  // ------------------------------------------------------------
-  // Cambio de mes vía el dropdown. Cuando agregues Septiembre,
-  // solo hace falta: 1) una <option value="septiembre-2026"> más
-  // en el <select>, y 2) un .month-panel nuevo con ese mismo id.
-  // Este script ya los detecta automáticamente, sin tocar nada más.
-  // ------------------------------------------------------------
-  document.getElementById('month-picker').addEventListener('change', function(){
-    document.querySelectorAll('.month-panel').forEach(p => p.classList.remove('active'));
-    document.getElementById(this.value).classList.add('active');
-  });
+  // ============================================================
+  // FASE 3 — index.html dinámico
+  // Ya no hay dashboards escritos a mano aquí. Este script:
+  //   1) descarga manifest.json (lo genera solo el GitHub Action)
+  //   2) agrupa los dashboards por mes y por categoría
+  //   3) arma el <select> de meses y las tarjetas de cada uno
+  // Si mañana subes un dashboard nuevo con su bloque de
+  // metadatos en la carpeta correcta, aparece aquí solo —
+  // no hay que tocar este archivo para nada.
+  // ============================================================
+
+  const NOMBRES_MES = [
+    'Enero','Febrero','Marzo','Abril','Mayo','Junio',
+    'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'
+  ];
+
+  // Orden fijo en el que queremos mostrar las categorías.
+  // Si aparece una categoría nueva que no está en esta lista,
+  // se agrega al final automáticamente.
+  const ORDEN_CATEGORIAS = ['Zonas', 'Saldos', 'Convenios', 'Varios'];
+
+  const COLOR_CATEGORIA = {
+    'Zonas':     'var(--cat-zonas)',
+    'Saldos':    'var(--cat-saldos)',
+    'Convenios': 'var(--cat-convenios)',
+    'Varios':    'var(--cat-varios)'
+  };
+
+  function colorDeCategoria(categoria){
+    return COLOR_CATEGORIA[categoria] || 'var(--blue-bright)';
+  }
+
+  // "2026-08-01" -> { year: 2026, monthIndex: 7 }
+  // (se separa a mano el string para evitar líos de zona horaria)
+  function parsearFecha(fechaTexto){
+    const partes = fechaTexto.split('-').map(Number);
+    return { year: partes[0], monthIndex: partes[1] - 1 };
+  }
+
+  function renderCategoria(categoria, dashboards){
+    if (dashboards.length === 0) return '';
+
+    const filas = dashboards.map(d => `
+      <a class="row" href="${d.ruta}">
+        <span class="bullet" style="background:${colorDeCategoria(categoria)}"></span>
+        <span class="row-text">
+          <span class="row-title">${d.titulo}</span>
+          <span class="row-desc">${d.descripcion || ''}</span>
+        </span>
+        <span class="row-arrow">↗</span>
+      </a>
+    `).join('');
+
+    const palabra = dashboards.length === 1 ? 'dashboard' : 'dashboards';
+
+    return `
+      <div class="cat-block">
+        <div class="cat-heading">
+          <span class="dot" style="background:${colorDeCategoria(categoria)}"></span>
+          ${categoria}
+          <span class="count">${dashboards.length} ${palabra}</span>
+        </div>
+        ${filas}
+      </div>
+    `;
+  }
+
+  async function iniciar(){
+    const contenedor = document.getElementById('contenido-meses');
+    const selector = document.getElementById('month-picker');
+
+    let manifest;
+    try{
+      const respuesta = await fetch('manifest.json');
+      if (!respuesta.ok) throw new Error('No se encontró manifest.json');
+      manifest = await respuesta.json();
+    }catch(error){
+      contenedor.innerHTML = `<p style="color:var(--text-muted); font-size:14px;">
+        No se pudo cargar la lista de dashboards. Intenta recargar la página.
+      </p>`;
+      console.error(error);
+      return;
+    }
+
+    // Agrupa los dashboards por mes (clave "AAAA-MM")
+    const meses = {}; // { "2026-08": { etiqueta: "Agosto 2026", items: [...] } }
+
+    manifest.dashboards.forEach(d => {
+      const { year, monthIndex } = parsearFecha(d.fecha);
+      const clave = `${year}-${String(monthIndex + 1).padStart(2, '0')}`;
+      if (!meses[clave]){
+        meses[clave] = { etiqueta: `${NOMBRES_MES[monthIndex]} ${year}`, items: [] };
+      }
+      meses[clave].items.push(d);
+    });
+
+    // Meses del más reciente al más antiguo
+    const clavesOrdenadas = Object.keys(meses).sort().reverse();
+
+    if (clavesOrdenadas.length === 0){
+      contenedor.innerHTML = `<p style="color:var(--text-muted); font-size:14px;">
+        Todavía no hay dashboards publicados.
+      </p>`;
+      return;
+    }
+
+    // Arma el <select> de meses
+    selector.innerHTML = clavesOrdenadas
+      .map(clave => `<option value="${clave}">${meses[clave].etiqueta}</option>`)
+      .join('');
+
+    // Arma el contenido de cada mes (todos ocultos salvo el más reciente)
+    contenedor.innerHTML = clavesOrdenadas.map(clave => {
+      const items = meses[clave].items;
+
+      // Categorías en el orden fijo, más cualquier categoría extra al final
+      const categoriasEncontradas = [...new Set(items.map(d => d.categoria))];
+      const categoriasOrdenadas = [
+        ...ORDEN_CATEGORIAS.filter(c => categoriasEncontradas.includes(c)),
+        ...categoriasEncontradas.filter(c => !ORDEN_CATEGORIAS.includes(c))
+      ];
+
+      const bloques = categoriasOrdenadas
+        .map(cat => renderCategoria(cat, items.filter(d => d.categoria === cat)))
+        .join('');
+
+      const activo = clave === clavesOrdenadas[0] ? 'active' : '';
+      return `<div class="month-panel ${activo}" id="mes-${clave}">${bloques}</div>`;
+    }).join('');
+
+    // Cambiar de mes desde el dropdown
+    selector.addEventListener('change', function(){
+      document.querySelectorAll('.month-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('mes-' + this.value).classList.add('active');
+    });
+
+    // "Última actualización" en el pie de página
+    const fechaGen = new Date(manifest.generado);
+    const texto = fechaGen.toLocaleString('es-MX', {
+      day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit'
+    });
+    document.getElementById('ultima-actualizacion').textContent = `· Actualizado: ${texto}`;
+  }
+
+  iniciar();
 </script>
 
 </body>
