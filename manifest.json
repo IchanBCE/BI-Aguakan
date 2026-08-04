@@ -1,6 +1,6 @@
 {
-  "generado": "2026-08-04T22:21:15.764Z",
-  "total": 4,
+  "generado": "2026-08-04T22:39:06.275Z",
+  "total": 5,
   "dashboards": [
     {
       "titulo": "Convenios Agosto",
@@ -44,6 +44,17 @@
         "Zonas"
       ],
       "ruta": "Reportes/2026/Agosto/Zonas/zona-agosto.html"
+    },
+    {
+      "titulo": "Prueba de Automatización",
+      "categoria": "Varios",
+      "fecha": "2026-07-15",
+      "descripcion": "Dashboard de prueba para validar que el sistema automático funciona de punta a punta",
+      "tags": [
+        "Prueba",
+        "Automatización"
+      ],
+      "ruta": "Reportes/2026/Julio/Varios/prueba-automatizacion.html"
     }
   ]
 }
