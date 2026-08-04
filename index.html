@@ -444,7 +444,9 @@
 
     let manifest;
     try{
-      const respuesta = await fetch('manifest.json');
+      // { cache: 'no-store' } le dice al navegador que nunca use una
+      // copia guardada de manifest.json, que siempre pida la más nueva.
+      const respuesta = await fetch('manifest.json', { cache: 'no-store' });
       if (!respuesta.ok) throw new Error('No se encontró manifest.json');
       manifest = await respuesta.json();
     }catch(error){
