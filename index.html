@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plataforma de Dashboards · Aguakan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+  /* ============================================================
+     FASE 2 — index.html manual (estilo Aguakan)
+     Paleta y tipografía tomadas del diseño que compartiste
+     ("Proyectos Aguakan"). Sigue siendo una lista escrita a mano:
+     para agregar un dashboard nuevo, copia un <a class="row">
+     dentro de su categoría y ajusta el link y el título.
+     Para agregar un mes nuevo, copia el <button class="tab"> y
+     su <div class="panel"> correspondiente (ver comentarios abajo).
+     ============================================================ */
+
+  :root{
+    --navy-dark:   #0A1E4A;
+    --navy-mid:    #1650B9;
+    --blue-bright: #1F7FD1;
+    --cyan:        #5EEAFB;
+    --cyan-soft:   #8FF3FF;
+    --teal:        #14B8A6;
+
+    --panel-bg:    #F1F5F9;
+    --text-dark:   #0F2A43;
+    --text-muted:  #7C8CA0;
+    --border:      #E2E9F0;
+
+    --cat-zonas:     #2E86AB;
+    --cat-saldos:    #06A77D;
+    --cat-convenios: #E08E45;
+    --cat-varios:    #7C6FF0;
+
+    --font-display: 'Archivo Black', system-ui, sans-serif;
+    --font-body: 'Inter', system-ui, sans-serif;
+    --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  }
+
+  *{ box-sizing: border-box; }
+
+  body{
+    margin: 0;
+    font-family: var(--font-body);
+    background: var(--panel-bg);
+    color: var(--text-dark);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a{ text-decoration:none; color:inherit; }
+
+  @keyframes float{
+    0%   { transform: translateY(0px); }
+    50%  { transform: translateY(-16px); }
+    100% { transform: translateY(0px); }
+  }
+
+  /* ---------- HERO ---------- */
+
+  header.hero{
+    position: relative;
+    overflow: hidden;
+    padding: 40px 32px 120px;
+    background:
+      radial-gradient(circle at 85% 15%, rgba(255,255,255,0.10), transparent 40%),
+      linear-gradient(135deg, var(--navy-dark) 0%, var(--navy-mid) 55%, var(--blue-bright) 100%);
+    color: #fff;
+  }
+
+  .hero-top{
+    max-width: 1180px;
+    margin: 0 auto 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    z-index: 2;
+  }
+
+  .logo{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .logo svg{ width: 34px; height: 34px; }
+
+  .logo-text{
+    font-family: var(--font-display);
+    font-size: 15px;
+    letter-spacing: 0.04em;
+    color: #cfe8ff;
+  }
+
+  .btn-pill{
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 14px;
+    color: #fff;
+    background: linear-gradient(90deg, var(--teal), var(--blue-bright));
+    padding: 12px 22px;
+    border-radius: 999px;
+    box-shadow: 0 10px 24px rgba(20,184,166,0.35);
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+
+  .btn-pill:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px rgba(20,184,166,0.45);
+  }
+
+  .hero-body{
+    max-width: 1180px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  h1.headline{
+    font-family: var(--font-display);
+    line-height: 0.98;
+    margin: 0;
+    font-size: clamp(38px, 6vw, 68px);
+    letter-spacing: -0.01em;
+  }
+
+  h1.headline .line1{ color: #fff; display:block; }
+  h1.headline .line2{
+    display:block;
+    background: linear-gradient(90deg, var(--cyan), var(--cyan-soft));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  p.sub{
+    font-size: 15px;
+    color: rgba(255,255,255,0.75);
+    margin: 18px 0 0;
+    max-width: 480px;
+    font-weight: 500;
+  }
+
+  .by-line{
+    position: absolute;
+    right: 0;
+    bottom: -8px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    color: rgba(255,255,255,0.7);
+    text-transform: uppercase;
+  }
+
+  /* decoraciones flotantes: gotas y burbujas */
+  .deco{ position:absolute; z-index:1; pointer-events:none; }
+
+  .drop{
+    width: 26px; height: 34px;
+    background: linear-gradient(160deg, #ffffff, #cfe3f5 70%);
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(45deg);
+    opacity: 0.9;
+    animation: float 5s ease-in-out infinite;
+  }
+
+  .bubble{
+    border-radius: 50%;
+    background: radial-gradient(circle at 32% 28%, #ffffff, #8fd9f2 45%, #2f8fc7 100%);
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .d1{ top: 70px;  left: 6%;   animation-delay: .2s; }
+  .d2{ top: 30px;  right: 14%; animation-delay: 1.2s; width:18px; height:24px; }
+  .b1{ top: 110px; right: 22%; width: 46px; height:46px; animation-delay: .6s; }
+  .b2{ top: 210px; right: 6%;  width: 108px; height:108px; animation-delay: 0s; }
+
+  /* ---------- PANEL / TABS ---------- */
+
+  main.panel{
+    max-width: 1180px;
+    margin: -80px auto 0;
+    background: #fff;
+    border-radius: 28px 28px 0 0;
+    padding: 44px 40px 20px;
+    position: relative;
+    z-index: 3;
+    box-shadow: 0 -20px 40px rgba(10,30,74,0.08);
+  }
+
+  /* Selector de mes: un dropdown en vez de una fila de pestañas,
+     para que siga viéndose bien aunque haya 12+ meses acumulados. */
+  .month-select-wrap{
+    display:flex;
+    align-items:center;
+    gap: 12px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 24px;
+    margin-bottom: 32px;
+  }
+
+  .month-select-wrap .label{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+  }
+
+  select.month-select{
+    appearance: none;
+    -webkit-appearance: none;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--text-dark);
+    background: var(--panel-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 42px 10px 16px;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' stroke='%237C8CA0' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    transition: border-color .12s ease, box-shadow .12s ease;
+  }
+
+  select.month-select:hover,
+  select.month-select:focus{
+    border-color: var(--blue-bright);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(31,127,209,0.15);
+  }
+
+  .month-panel{ display:none; }
+  .month-panel.active{ display:block; }
+
+  .cat-block{ margin-bottom: 34px; }
+
+  .cat-heading{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 0 0 14px;
+  }
+
+  .cat-heading .dot{
+    width:9px; height:9px;
+    border-radius:50%;
+  }
+
+  .cat-heading .count{
+    margin-left: auto;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  .row{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    background: var(--panel-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px 20px;
+    margin-bottom: 10px;
+    transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+  }
+
+  .row:hover{
+    background: #fff;
+    transform: translateX(4px);
+    box-shadow: 0 8px 20px rgba(10,30,74,0.08);
+  }
+
+  .row .bullet{
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 4px rgba(0,0,0,0.03);
+  }
+
+  .row .row-text{ flex: 1; }
+
+  .row .row-title{
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--text-dark);
+  }
+
+  .row .row-desc{
+    font-size: 12.5px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  .row .row-arrow{
+    font-family: var(--font-mono);
+    color: var(--text-muted);
+    font-size: 18px;
+  }
+
+  footer.site{
+    text-align:center;
+    padding: 30px 24px 46px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-muted);
+    background: #fff;
+  }
+
+</style>
+</head>
+<body>
+
+<header class="hero">
+
+  <!-- gotas y burbujas decorativas, con animación de flotado -->
+  <div class="deco drop d1"></div>
+  <div class="deco drop d2"></div>
+  <div class="deco bubble b1"></div>
+  <div class="deco bubble b2"></div>
+
+  <div class="hero-top">
+    <div class="logo">
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="19" stroke="#5EEAFB" stroke-width="2"/>
+        <path d="M20 8c4 5 8 9 8 14a8 8 0 1 1-16 0c0-5 4-9 8-14z" fill="#5EEAFB"/>
+      </svg>
+      <span class="logo-text">AGUAKAN</span>
+    </div>
+    <a class="btn-pill" href="https://github.com/IchanBCE/BI-Aguakan" target="_blank" rel="noopener">Ver repositorio</a>
+  </div>
+
+  <div class="hero-body">
+    <h1 class="headline">
+      <span class="line1">PLATAFORMA DE</span>
+      <span class="line2">DASHBOARDS</span>
+    </h1>
+    <p class="sub">Repositorio central de reportes de cobranza, zonas, convenios y saldos.</p>
+    <span class="by-line">BI · Aguakan</span>
+  </div>
+</header>
+
+<main class="panel">
+
+  <div class="month-select-wrap">
+    <span class="label">Mes:</span>
+    <!-- Cada mes nuevo = una <option> más aquí. El value debe
+         coincidir con el id del .month-panel correspondiente. -->
+    <select class="month-select" id="month-picker">
+      <option value="agosto-2026">Agosto 2026</option>
+    </select>
+  </div>
+
+  <!-- ======= AGOSTO 2026 ======= -->
+  <div class="month-panel active" id="agosto-2026">
+
+    <div class="cat-block">
+      <div class="cat-heading">
+        <span class="dot" style="background:var(--cat-zonas)"></span>
+        Zonas
+        <span class="count">1 dashboard</span>
+      </div>
+      <a class="row" href="Reportes/2026/Agosto/Zonas/zona-agosto.html">
+        <span class="bullet" style="background:var(--cat-zonas)"></span>
+        <span class="row-text">
+          <span class="row-title">Dashboard de Zonas — Agosto</span>
+          <span class="row-desc">Cobranza y desempeño por zona</span>
+        </span>
+        <span class="row-arrow">↗</span>
+      </a>
+    </div>
+
+    <div class="cat-block">
+      <div class="cat-heading">
+        <span class="dot" style="background:var(--cat-saldos)"></span>
+        Saldos
+        <span class="count">1 dashboard</span>
+      </div>
+      <a class="row" href="Reportes/2026/Agosto/Saldos/saldos-agosto.html">
+        <span class="bullet" style="background:var(--cat-saldos)"></span>
+        <span class="row-text">
+          <span class="row-title">Dashboard de Saldos — Agosto</span>
+          <span class="row-desc">Estado de saldos y morosidad del mes</span>
+        </span>
+        <span class="row-arrow">↗</span>
+      </a>
+    </div>
+
+    <div class="cat-block">
+      <div class="cat-heading">
+        <span class="dot" style="background:var(--cat-convenios)"></span>
+        Convenios
+        <span class="count">1 dashboard</span>
+      </div>
+      <a class="row" href="Reportes/2026/Agosto/Convenios/convenios-agosto.html">
+        <span class="bullet" style="background:var(--cat-convenios)"></span>
+        <span class="row-text">
+          <span class="row-title">Dashboard de Convenios — Agosto</span>
+          <span class="row-desc">Seguimiento de convenios de pago activos</span>
+        </span>
+        <span class="row-arrow">↗</span>
+      </a>
+    </div>
+
+    <div class="cat-block">
+      <div class="cat-heading">
+        <span class="dot" style="background:var(--cat-varios)"></span>
+        Varios
+        <span class="count">1 dashboard</span>
+      </div>
+      <a class="row" href="Reportes/2026/Agosto/Varios/varios-agosto.html">
+        <span class="bullet" style="background:var(--cat-varios)"></span>
+        <span class="row-text">
+          <span class="row-title">Dashboard Varios — Agosto</span>
+          <span class="row-desc">Reportes generales del mes</span>
+        </span>
+        <span class="row-arrow">↗</span>
+      </a>
+    </div>
+
+  </div>
+
+</main>
+
+<footer class="site">BI-Aguakan · repositorio interno de dashboards</footer>
+
+<script>
+  // ------------------------------------------------------------
+  // Cambio de mes vía el dropdown. Cuando agregues Septiembre,
+  // solo hace falta: 1) una <option value="septiembre-2026"> más
+  // en el <select>, y 2) un .month-panel nuevo con ese mismo id.
+  // Este script ya los detecta automáticamente, sin tocar nada más.
+  // ------------------------------------------------------------
+  document.getElementById('month-picker').addEventListener('change', function(){
+    document.querySelectorAll('.month-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById(this.value).classList.add('active');
+  });
+</script>
+
+</body>
+</html>
