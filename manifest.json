@@ -1,0 +1,49 @@
+{
+  "generado": "2026-08-04T22:21:15.764Z",
+  "total": 4,
+  "dashboards": [
+    {
+      "titulo": "Convenios Agosto",
+      "categoria": "Convenios",
+      "fecha": "2026-08-01",
+      "descripcion": "Seguimiento de convenios de pago activos",
+      "tags": [
+        "Convenios",
+        "Pagos"
+      ],
+      "ruta": "Reportes/2026/Agosto/Convenios/convenios-agosto.html"
+    },
+    {
+      "titulo": "Saldos Agosto",
+      "categoria": "Saldos",
+      "fecha": "2026-08-01",
+      "descripcion": "Estado de saldos y morosidad del mes",
+      "tags": [
+        "Saldos",
+        "Morosidad"
+      ],
+      "ruta": "Reportes/2026/Agosto/Saldos/saldos-agosto.html"
+    },
+    {
+      "titulo": "Varios Agosto",
+      "categoria": "Varios",
+      "fecha": "2026-08-01",
+      "descripcion": "Reportes generales del mes",
+      "tags": [
+        "Varios"
+      ],
+      "ruta": "Reportes/2026/Agosto/Varios/varios-agosto.html"
+    },
+    {
+      "titulo": "Zona Agosto",
+      "categoria": "Zonas",
+      "fecha": "2026-08-01",
+      "descripcion": "Cobranza y desempeño por zona",
+      "tags": [
+        "Cobranza",
+        "Zonas"
+      ],
+      "ruta": "Reportes/2026/Agosto/Zonas/zona-agosto.html"
+    }
+  ]
+}
