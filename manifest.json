@@ -1,17 +1,5 @@
 {
-  "generado": "2026-08-05T15:01:13.459Z",
-  "total": 1,
-  "dashboards": [
-    {
-      "titulo": "Prueba de Zonas",
-      "categoria": "Zonas",
-      "fecha": "2026-07-20",
-      "descripcion": "Segundo dashboard de prueba, para validar varias categorías en el mismo mes",
-      "tags": [
-        "Prueba",
-        "Zonas"
-      ],
-      "ruta": "Reportes/2026/Julio/Zonas/prueba-zonas-julio.html"
-    }
-  ]
+  "generado": "2026-08-05T15:01:36.344Z",
+  "total": 0,
+  "dashboards": []
 }
