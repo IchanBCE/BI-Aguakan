@@ -1,29 +1,7 @@
 {
-  "generado": "2026-08-05T14:59:35.378Z",
-  "total": 5,
+  "generado": "2026-08-05T15:00:24.485Z",
+  "total": 3,
   "dashboards": [
-    {
-      "titulo": "Convenios Agosto",
-      "categoria": "Convenios",
-      "fecha": "2026-08-01",
-      "descripcion": "Seguimiento de convenios de pago activos",
-      "tags": [
-        "Convenios",
-        "Pagos"
-      ],
-      "ruta": "Reportes/2026/Agosto/Convenios/convenios-agosto.html"
-    },
-    {
-      "titulo": "Saldos Agosto",
-      "categoria": "Saldos",
-      "fecha": "2026-08-01",
-      "descripcion": "Estado de saldos y morosidad del mes",
-      "tags": [
-        "Saldos",
-        "Morosidad"
-      ],
-      "ruta": "Reportes/2026/Agosto/Saldos/saldos-agosto.html"
-    },
     {
       "titulo": "Varios Agosto",
       "categoria": "Varios",
