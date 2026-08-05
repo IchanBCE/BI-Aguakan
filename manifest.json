@@ -1,19 +1,7 @@
 {
-  "generado": "2026-08-05T17:21:25.786Z",
-  "total": 8,
+  "generado": "2026-08-05T17:31:13.845Z",
+  "total": 7,
   "dashboards": [
-    {
-      "titulo": "Propuesta Piloto Cortes y Reconexiones",
-      "categoria": "Varios",
-      "fecha": "2026-07-28",
-      "descripcion": "Propuesta de esquema de turnos para el equipo de limitaciones y reconexiones, con anexo de KPIs",
-      "tags": [
-        "Propuesta",
-        "Recursos Humanos",
-        "KPIs"
-      ],
-      "ruta": "Reportes/2026/Julio/Varios/propuesta-piloto-cortes-reconexiones.html"
-    },
     {
       "titulo": "Instructivo Boleta Digital",
       "categoria": "Varios",
