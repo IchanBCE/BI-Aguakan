@@ -1,6 +1,6 @@
 {
-  "generado": "2026-08-05T15:37:16.446Z",
-  "total": 1,
+  "generado": "2026-08-05T16:48:22.497Z",
+  "total": 2,
   "dashboards": [
     {
       "titulo": "Prueba de Plantilla",
@@ -12,6 +12,18 @@
         "Plantilla"
       ],
       "ruta": "Reportes/2026/Agosto/Varios/prueba-plantilla.html"
+    },
+    {
+      "titulo": "Zona 77",
+      "categoria": "Zonas",
+      "fecha": "2026-07-15",
+      "descripcion": "Panel de cartera vencida · Supermanzana 77",
+      "tags": [
+        "Cartera vencida",
+        "Zona 77",
+        "Fraccionamientos"
+      ],
+      "ruta": "Reportes/2026/Julio/Zonas/zona-77.html"
     }
   ]
 }
