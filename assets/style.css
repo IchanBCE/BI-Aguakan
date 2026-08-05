@@ -1,0 +1,131 @@
+/* ================================================================
+   assets/style.css
+   Estilo compartido por TODOS los dashboards de BI-Aguakan.
+
+   Qué incluye:
+   - Variables de color y tipografía (la misma paleta de index.html)
+   - La barra superior (.dash-header) que aparece en cada dashboard,
+     con tu marca y un link de regreso al inicio.
+
+   Qué NO incluye a propósito:
+   - El diseño del contenido interno de cada dashboard (gráficas,
+     tablas, etc.) — eso sigue siendo libre, cada dashboard puede
+     verse distinto por dentro. Este archivo solo estandariza el
+     "marco" alrededor: la barra de arriba y los colores base.
+   ================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+:root{
+  --navy-dark:   #0A1E4A;
+  --navy-mid:    #1650B9;
+  --blue-bright: #1F7FD1;
+  --cyan:        #5EEAFB;
+  --cyan-soft:   #8FF3FF;
+  --teal:        #14B8A6;
+
+  --panel-bg:    #F1F5F9;
+  --text-dark:   #0F2A43;
+  --text-muted:  #7C8CA0;
+  --border:      #E2E9F0;
+
+  --cat-zonas:     #2E86AB;
+  --cat-saldos:    #06A77D;
+  --cat-convenios: #E08E45;
+  --cat-varios:    #7C6FF0;
+
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+}
+
+/* ---------- Barra superior compartida ---------- */
+
+.dash-header{
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 12px 22px;
+  background: linear-gradient(120deg, var(--navy-dark), var(--navy-mid));
+  color: #fff;
+  font-family: var(--font-body);
+  box-shadow: 0 4px 16px rgba(10,30,74,0.25);
+}
+
+.dash-header-brand{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.dash-header-brand img{ width: 24px; height: 24px; object-fit: contain; }
+
+.dash-header-brand span{
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  color: var(--cyan-soft);
+}
+
+.dash-header-info{
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.dash-header-title{
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dash-header-cat{
+  align-self: flex-start;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #fff;
+  padding: 2px 10px;
+  border-radius: 999px;
+}
+
+.dash-header-cat.cat-zonas     { background: var(--cat-zonas); }
+.dash-header-cat.cat-saldos    { background: var(--cat-saldos); }
+.dash-header-cat.cat-convenios { background: var(--cat-convenios); }
+.dash-header-cat.cat-varios    { background: var(--cat-varios); }
+
+.dash-header-back{
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: rgba(255,255,255,0.9);
+  text-decoration: none;
+  padding: 8px 16px;
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 999px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background 0.12s ease;
+}
+
+.dash-header-back:hover{ background: rgba(255,255,255,0.15); }
+
+/* Contenedor opcional para el contenido del dashboard.
+   Úsalo solo si tu dashboard no trae ya su propio diseño de
+   página completa (como los que ya tienes, que traen su propio
+   fondo). Es un extra, no es obligatorio usarlo. */
+.dash-content{
+  font-family: var(--font-body);
+  color: var(--text-dark);
+  padding: 32px;
+}
