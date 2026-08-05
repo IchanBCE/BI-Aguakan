@@ -1,6 +1,6 @@
 {
-  "generado": "2026-08-05T16:48:53.430Z",
-  "total": 1,
+  "generado": "2026-08-05T16:54:27.799Z",
+  "total": 2,
   "dashboards": [
     {
       "titulo": "Zona 77",
@@ -13,6 +13,18 @@
         "Fraccionamientos"
       ],
       "ruta": "Reportes/2026/Julio/Zonas/zona-77.html"
+    },
+    {
+      "titulo": "Zona Arbolada",
+      "categoria": "Zonas",
+      "fecha": "2026-07-10",
+      "descripcion": "Análisis de saldos vencidos, cortes y antigüedad de deuda · SM 336",
+      "tags": [
+        "Cartera vencida",
+        "Zona Arbolada",
+        "SM 336"
+      ],
+      "ruta": "Reportes/2026/Julio/Zonas/zona-arbolada.html"
     }
   ]
 }
