@@ -1,17 +1,7 @@
 {
-  "generado": "2026-08-05T15:00:24.485Z",
-  "total": 3,
+  "generado": "2026-08-05T15:00:48.553Z",
+  "total": 2,
   "dashboards": [
-    {
-      "titulo": "Varios Agosto",
-      "categoria": "Varios",
-      "fecha": "2026-08-01",
-      "descripcion": "Reportes generales del mes",
-      "tags": [
-        "Varios"
-      ],
-      "ruta": "Reportes/2026/Agosto/Varios/varios-agosto.html"
-    },
     {
       "titulo": "Prueba de Zonas",
       "categoria": "Zonas",
