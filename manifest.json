@@ -1,18 +1,7 @@
 {
-  "generado": "2026-08-05T16:48:22.497Z",
-  "total": 2,
+  "generado": "2026-08-05T16:48:53.430Z",
+  "total": 1,
   "dashboards": [
-    {
-      "titulo": "Prueba de Plantilla",
-      "categoria": "Varios",
-      "fecha": "2026-08-05",
-      "descripcion": "Dashboard de prueba usando la plantilla y el estilo compartido de la Fase 4",
-      "tags": [
-        "Prueba",
-        "Plantilla"
-      ],
-      "ruta": "Reportes/2026/Agosto/Varios/prueba-plantilla.html"
-    },
     {
       "titulo": "Zona 77",
       "categoria": "Zonas",
