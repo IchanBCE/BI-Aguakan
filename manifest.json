@@ -1,6 +1,6 @@
 {
-  "generado": "2026-08-05T15:00:48.553Z",
-  "total": 2,
+  "generado": "2026-08-05T15:01:13.459Z",
+  "total": 1,
   "dashboards": [
     {
       "titulo": "Prueba de Zonas",
@@ -12,17 +12,6 @@
         "Zonas"
       ],
       "ruta": "Reportes/2026/Julio/Zonas/prueba-zonas-julio.html"
-    },
-    {
-      "titulo": "Prueba de Automatización",
-      "categoria": "Varios",
-      "fecha": "2026-07-15",
-      "descripcion": "Dashboard de prueba para validar que el sistema automático funciona de punta a punta",
-      "tags": [
-        "Prueba",
-        "Automatización"
-      ],
-      "ruta": "Reportes/2026/Julio/Varios/prueba-automatizacion.html"
     }
   ]
 }
