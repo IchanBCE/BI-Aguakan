@@ -74,22 +74,31 @@
   }
 
   .dato{
-    display: flex;
-    align-items: center;
-    gap: 12px;
     background: var(--panel-bg);
     border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 14px 16px;
+    overflow: hidden;
     text-align: left;
-    text-decoration: none;
-    color: var(--text-dark);
-    transition: transform .12s ease, box-shadow .12s ease;
   }
 
-  .dato:hover{
-    transform: translateY(-2px);
-    box-shadow: 0 8px 18px rgba(10,30,74,0.08);
+  .dato-main{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    text-decoration: none;
+    color: var(--text-dark);
+    transition: background .12s ease;
+  }
+
+  .dato-main:hover{ background: rgba(10,30,74,0.03); }
+
+  .dato-main .flecha{
+    margin-left: auto;
+    font-family: var(--font-mono);
+    font-size: 16px;
+    color: var(--text-muted);
+    flex-shrink: 0;
   }
 
   .dato .icono{
@@ -123,6 +132,26 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
+
+  .copiar-btn{
+    display: block;
+    width: 100%;
+    background: none;
+    border: none;
+    border-top: 1px solid var(--border);
+    padding: 9px 16px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: background .12s ease, color .12s ease;
+  }
+
+  .copiar-btn:hover{ background: rgba(10,30,74,0.04); color: var(--text-dark); }
+
+  .copiar-btn.copiado{ color: var(--teal); }
 </style>
 </head>
 <body>
@@ -145,32 +174,65 @@
     <p class="puesto">Analista Comercial</p>
 
     <div class="datos">
-      <a class="dato correo" href="mailto:ichan@aguakan.com">
-        <span class="icono">✉</span>
-        <span class="texto">
-          <span class="label">Correo</span>
-          <span class="valor">ichan@aguakan.com</span>
-        </span>
-      </a>
+      <div class="dato correo">
+        <a class="dato-main" href="https://mail.google.com/mail/?view=cm&fs=1&to=ichan@aguakan.com" target="_blank" rel="noopener">
+          <span class="icono">✉</span>
+          <span class="texto">
+            <span class="label">Correo</span>
+            <span class="valor">ichan@aguakan.com</span>
+          </span>
+          <span class="flecha">↗</span>
+        </a>
+        <button class="copiar-btn" data-copiar="ichan@aguakan.com">Copiar</button>
+      </div>
 
-      <a class="dato whatsapp" href="https://wa.me/529982997373" target="_blank" rel="noopener">
-        <span class="icono">💬</span>
-        <span class="texto">
-          <span class="label">WhatsApp</span>
-          <span class="valor">998 299 7373</span>
-        </span>
-      </a>
+      <div class="dato whatsapp">
+        <a class="dato-main" href="https://wa.me/529982997373" target="_blank" rel="noopener">
+          <span class="icono">💬</span>
+          <span class="texto">
+            <span class="label">WhatsApp</span>
+            <span class="valor">998 299 7373</span>
+          </span>
+          <span class="flecha">↗</span>
+        </a>
+        <button class="copiar-btn" data-copiar="9982997373">Copiar</button>
+      </div>
 
-      <a class="dato telefono" href="tel:+529982997373">
-        <span class="icono">☎</span>
-        <span class="texto">
-          <span class="label">Teléfono</span>
-          <span class="valor">998 299 7373</span>
-        </span>
-      </a>
+      <div class="dato telefono">
+        <a class="dato-main" href="tel:+529982997373">
+          <span class="icono">☎</span>
+          <span class="texto">
+            <span class="label">Teléfono</span>
+            <span class="valor">998 299 7373</span>
+          </span>
+          <span class="flecha">↗</span>
+        </a>
+        <button class="copiar-btn" data-copiar="9982997373">Copiar</button>
+      </div>
     </div>
   </div>
 </main>
+
+<script>
+  // Copia el dato al portapapeles y muestra un aviso breve de confirmación
+  document.querySelectorAll('.copiar-btn').forEach(function(boton){
+    boton.addEventListener('click', async function(){
+      const texto = this.dataset.copiar;
+      try{
+        await navigator.clipboard.writeText(texto);
+        const original = this.textContent;
+        this.textContent = '¡Copiado!';
+        this.classList.add('copiado');
+        setTimeout(() => {
+          this.textContent = original;
+          this.classList.remove('copiado');
+        }, 1500);
+      }catch(error){
+        console.error('No se pudo copiar:', error);
+      }
+    });
+  });
+</script>
 
 </body>
 </html>
