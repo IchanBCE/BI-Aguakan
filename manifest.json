@@ -1,6 +1,6 @@
 {
-  "generado": "2026-08-04T22:54:00.321Z",
-  "total": 6,
+  "generado": "2026-08-05T14:59:35.378Z",
+  "total": 5,
   "dashboards": [
     {
       "titulo": "Convenios Agosto",
@@ -33,17 +33,6 @@
         "Varios"
       ],
       "ruta": "Reportes/2026/Agosto/Varios/varios-agosto.html"
-    },
-    {
-      "titulo": "Zona Agosto",
-      "categoria": "Zonas",
-      "fecha": "2026-08-01",
-      "descripcion": "Cobranza y desempeño por zona",
-      "tags": [
-        "Cobranza",
-        "Zonas"
-      ],
-      "ruta": "Reportes/2026/Agosto/Zonas/zona-agosto.html"
     },
     {
       "titulo": "Prueba de Zonas",
