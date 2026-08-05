@@ -1,6 +1,6 @@
 {
-  "generado": "2026-08-05T17:08:05.801Z",
-  "total": 5,
+  "generado": "2026-08-05T17:14:19.937Z",
+  "total": 6,
   "dashboards": [
     {
       "titulo": "Instructivo Boleta Digital",
@@ -12,6 +12,18 @@
         "Boleta Digital"
       ],
       "ruta": "Reportes/2026/Julio/Varios/instructivo-boleta-digital.html"
+    },
+    {
+      "titulo": "Carta Invitación Zona 77",
+      "categoria": "Zonas",
+      "fecha": "2026-07-24",
+      "descripcion": "Invitación especial de regularización para clientes de Zona 77",
+      "tags": [
+        "Zona 77",
+        "Regularización",
+        "Carta"
+      ],
+      "ruta": "Reportes/2026/Julio/Zonas/carta-invitacion-zona-77.html"
     },
     {
       "titulo": "Zona 77",
