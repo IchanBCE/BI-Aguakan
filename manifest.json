@@ -1,6 +1,6 @@
 {
-  "generado": "2026-08-05T16:54:27.799Z",
-  "total": 2,
+  "generado": "2026-08-05T17:00:25.826Z",
+  "total": 4,
   "dashboards": [
     {
       "titulo": "Zona 77",
@@ -15,6 +15,18 @@
       "ruta": "Reportes/2026/Julio/Zonas/zona-77.html"
     },
     {
+      "titulo": "Convenios por Supermanzana",
+      "categoria": "Convenios",
+      "fecha": "2026-07-12",
+      "descripcion": "Zonas con mayor y menor cumplimiento · Cancún",
+      "tags": [
+        "Convenios",
+        "Supermanzana",
+        "Cumplimiento"
+      ],
+      "ruta": "Reportes/2026/Julio/Convenios/convenios-por-supermanzana.html"
+    },
+    {
       "titulo": "Zona Arbolada",
       "categoria": "Zonas",
       "fecha": "2026-07-10",
@@ -25,6 +37,18 @@
         "SM 336"
       ],
       "ruta": "Reportes/2026/Julio/Zonas/zona-arbolada.html"
+    },
+    {
+      "titulo": "Rendimiento de Empleados",
+      "categoria": "Convenios",
+      "fecha": "2026-07-05",
+      "descripcion": "Convenios de cobranza · Enero–Junio 2026",
+      "tags": [
+        "Convenios",
+        "Rendimiento",
+        "Empleados"
+      ],
+      "ruta": "Reportes/2026/Julio/Convenios/convenios-rendimiento-empleados.html"
     }
   ]
 }
