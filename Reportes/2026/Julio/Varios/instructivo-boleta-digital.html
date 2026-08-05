@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instructivo Boleta Digital — Aguakan</title>
+
+<!-- ============================================================
+     Este archivo NO es un dashboard con datos — es un documento
+     (PDF) envuelto en la misma plantilla, para que el robot de
+     automatización lo detecte igual que cualquier dashboard y
+     aparezca solo en la página principal. El PDF real vive junto
+     a este archivo, en "instructivo-boleta-digital.pdf".
+     ============================================================ -->
+
+<script type="application/json" id="meta">
+{
+  "titulo": "Instructivo Boleta Digital",
+  "categoria": "Varios",
+  "fecha": "2026-07-24",
+  "descripcion": "Guía paso a paso para descargar tu boleta digital",
+  "tags": ["Instructivo", "Boleta Digital"]
+}
+</script>
+
+<link rel="stylesheet" href="../../../../assets/style.css">
+<style>
+  .pdf-wrap{
+    max-width: 900px;
+    margin: 24px auto;
+    padding: 0 20px;
+  }
+  .pdf-toolbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+  .pdf-toolbar p{
+    font-size: 13px;
+    color: var(--text-muted);
+    font-family: var(--font-body);
+    margin: 0;
+  }
+  .pdf-toolbar a{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: #fff;
+    background: var(--blue-bright);
+    padding: 8px 16px;
+    border-radius: 999px;
+    text-decoration: none;
+  }
+  .pdf-frame{
+    width: 100%;
+    height: 85vh;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 10px 24px rgba(10,30,74,0.08);
+  }
+</style>
+</head>
+<body>
+
+<header class="dash-header">
+  <a class="dash-header-brand" href="../../../../index.html">
+    <img src="../../../../assets/logo-icono.png" alt="Aguakan">
+    <span>AGUAKAN</span>
+  </a>
+  <div class="dash-header-info">
+    <span class="dash-header-cat cat-varios">Varios</span>
+    <h1 class="dash-header-title">Instructivo Boleta Digital</h1>
+  </div>
+  <a class="dash-header-back" href="../../../../index.html">← Inicio</a>
+</header>
+
+<main class="pdf-wrap">
+  <div class="pdf-toolbar">
+    <p>Guía paso a paso para descargar tu boleta digital.</p>
+    <a href="instructivo-boleta-digital.pdf" target="_blank" rel="noopener">Descargar PDF</a>
+  </div>
+
+  <!-- El PDF se muestra incrustado; el navegador usa su propio
+       visor, no se descarga solo al entrar a esta página. -->
+  <iframe class="pdf-frame" src="instructivo-boleta-digital.pdf" title="Instructivo Boleta Digital"></iframe>
+</main>
+
+</body>
+</html>
