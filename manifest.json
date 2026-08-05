@@ -1,5 +1,17 @@
 {
-  "generado": "2026-08-05T15:01:36.344Z",
-  "total": 0,
-  "dashboards": []
+  "generado": "2026-08-05T15:37:16.446Z",
+  "total": 1,
+  "dashboards": [
+    {
+      "titulo": "Prueba de Plantilla",
+      "categoria": "Varios",
+      "fecha": "2026-08-05",
+      "descripcion": "Dashboard de prueba usando la plantilla y el estilo compartido de la Fase 4",
+      "tags": [
+        "Prueba",
+        "Plantilla"
+      ],
+      "ruta": "Reportes/2026/Agosto/Varios/prueba-plantilla.html"
+    }
+  ]
 }
