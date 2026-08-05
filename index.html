@@ -157,6 +157,29 @@
     text-transform: uppercase;
   }
 
+  /* ---------- Estadísticas generales (Fase 5) ---------- */
+  .stats{
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    margin-top: 26px;
+    font-family: var(--font-mono);
+  }
+
+  .stats .stat b{
+    display: block;
+    font-size: 24px;
+    font-weight: 500;
+    color: #fff;
+  }
+
+  .stats .stat span{
+    font-size: 11px;
+    color: rgba(255,255,255,0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+  }
+
   /* decoraciones flotantes: gotas y burbujas */
   .deco{ position:absolute; z-index:1; pointer-events:none; }
 
@@ -198,10 +221,18 @@
   .month-select-wrap{
     display:flex;
     align-items:center;
-    gap: 12px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
     border-bottom: 1px solid var(--border);
     padding-bottom: 24px;
     margin-bottom: 32px;
+  }
+
+  .month-select-wrap .mes-grupo{
+    display:flex;
+    align-items:center;
+    gap: 12px;
   }
 
   .month-select-wrap .label{
@@ -210,6 +241,52 @@
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--text-muted);
+  }
+
+  /* ---------- Buscador (Fase 5) ---------- */
+  .search-wrap{
+    position: relative;
+    flex: 1;
+    min-width: 220px;
+    max-width: 320px;
+  }
+
+  .search-wrap svg{
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 15px;
+    height: 15px;
+    color: var(--text-muted);
+    pointer-events: none;
+  }
+
+  input.search-input{
+    width: 100%;
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--text-dark);
+    background: var(--panel-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 14px 10px 38px;
+    transition: border-color .12s ease, box-shadow .12s ease;
+  }
+
+  input.search-input:focus{
+    outline: none;
+    border-color: var(--blue-bright);
+    box-shadow: 0 0 0 3px rgba(31,127,209,0.15);
+  }
+
+  input.search-input::placeholder{ color: var(--text-muted); }
+
+  .search-info{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-muted);
+    margin: -16px 0 24px;
   }
 
   select.month-select{
@@ -345,6 +422,14 @@
       <span class="line2">DASHBOARDS</span>
     </h1>
     <p class="sub">Repositorio central de reportes de cobranza, zonas, convenios y saldos.</p>
+
+    <!-- Contadores generales (Fase 5) — se llenan solos leyendo manifest.json -->
+    <div class="stats">
+      <div class="stat"><b id="stat-total">–</b><span>Dashboards</span></div>
+      <div class="stat"><b id="stat-cats">–</b><span>Categorías</span></div>
+      <div class="stat"><b id="stat-meses">–</b><span>Meses activos</span></div>
+    </div>
+
     <span class="by-line">BI · Aguakan</span>
   </div>
 </header>
@@ -352,16 +437,32 @@
 <main class="panel">
 
   <div class="month-select-wrap">
-    <span class="label">Mes:</span>
-    <!-- Este <select> se llena solo con JavaScript, leyendo
-         manifest.json. Ya no se edita a mano. -->
-    <select class="month-select" id="month-picker"></select>
+    <div class="mes-grupo">
+      <span class="label">Mes:</span>
+      <!-- Este <select> se llena solo con JavaScript, leyendo
+           manifest.json. Ya no se edita a mano. -->
+      <select class="month-select" id="month-picker"></select>
+    </div>
+
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="7"/>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <input type="text" id="buscador" class="search-input" placeholder="Buscar por nombre o tag…">
+    </div>
   </div>
+
+  <!-- Aviso de resultados de búsqueda (oculto salvo cuando hay texto en el buscador) -->
+  <p id="search-info" class="search-info" style="display:none;"></p>
 
   <!-- Aquí se inyecta el contenido de cada mes (generado por JS) -->
   <div id="contenido-meses">
     <p id="estado-carga" style="color:var(--text-muted); font-size:14px;">Cargando dashboards…</p>
   </div>
+
+  <!-- Resultados del buscador (Fase 5) — oculto salvo cuando hay texto escrito -->
+  <div id="resultados-busqueda" style="display:none;"></div>
 
 </main>
 
@@ -512,6 +613,62 @@
       day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit'
     });
     document.getElementById('ultima-actualizacion').textContent = `· Actualizado: ${texto}`;
+
+    // ---------- Contadores generales (Fase 5) ----------
+    const totalCategorias = new Set(manifest.dashboards.map(d => d.categoria)).size;
+    document.getElementById('stat-total').textContent = manifest.dashboards.length;
+    document.getElementById('stat-cats').textContent = totalCategorias;
+    document.getElementById('stat-meses').textContent = clavesOrdenadas.length;
+
+    // ---------- Buscador por nombre o tag (Fase 5) ----------
+    const buscador = document.getElementById('buscador');
+    const resultados = document.getElementById('resultados-busqueda');
+    const infoResultados = document.getElementById('search-info');
+
+    buscador.addEventListener('input', function(){
+      const q = this.value.trim().toLowerCase();
+
+      if (q === ''){
+        // Sin búsqueda: se ve el modo normal por mes
+        resultados.style.display = 'none';
+        resultados.innerHTML = '';
+        infoResultados.style.display = 'none';
+        contenedor.style.display = '';
+        return;
+      }
+
+      const encontrados = manifest.dashboards.filter(d => {
+        const enTitulo = d.titulo?.toLowerCase().includes(q);
+        const enDescripcion = d.descripcion?.toLowerCase().includes(q);
+        const enTags = (d.tags || []).some(t => t.toLowerCase().includes(q));
+        return enTitulo || enDescripcion || enTags;
+      });
+
+      // Modo búsqueda: se oculta la vista por mes y se muestran los resultados
+      contenedor.style.display = 'none';
+
+      infoResultados.style.display = 'block';
+      infoResultados.textContent = encontrados.length === 0
+        ? `Sin resultados para "${this.value}".`
+        : `${encontrados.length} resultado(s) para "${this.value}" (de todos los meses):`;
+
+      if (encontrados.length === 0){
+        resultados.style.display = 'block';
+        resultados.innerHTML = '';
+        return;
+      }
+
+      const categoriasEnResultados = [...new Set(encontrados.map(d => d.categoria))];
+      const categoriasOrdenadas = [
+        ...ORDEN_CATEGORIAS.filter(c => categoriasEnResultados.includes(c)),
+        ...categoriasEnResultados.filter(c => !ORDEN_CATEGORIAS.includes(c))
+      ];
+
+      resultados.style.display = 'block';
+      resultados.innerHTML = categoriasOrdenadas
+        .map(cat => renderCategoria(cat, encontrados.filter(d => d.categoria === cat)))
+        .join('');
+    });
   }
 
   iniciar();
