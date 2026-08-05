@@ -1,6 +1,6 @@
 {
-  "generado": "2026-08-05T17:16:35.530Z",
-  "total": 7,
+  "generado": "2026-08-05T17:21:25.786Z",
+  "total": 8,
   "dashboards": [
     {
       "titulo": "Propuesta Piloto Cortes y Reconexiones",
@@ -36,6 +36,18 @@
         "Carta"
       ],
       "ruta": "Reportes/2026/Julio/Zonas/carta-invitacion-zona-77.html"
+    },
+    {
+      "titulo": "Estrategia Seguimiento a Convenios",
+      "categoria": "Convenios",
+      "fecha": "2026-07-18",
+      "descripcion": "Acciones preventivas y correctivas para reducir la cartera vencida y fortalecer el cumplimiento de convenios de pago",
+      "tags": [
+        "Convenios",
+        "Cartera Vencida",
+        "Estrategia"
+      ],
+      "ruta": "Reportes/2026/Julio/Convenios/propuesta-convenios-pago.html"
     },
     {
       "titulo": "Zona 77",
