@@ -1,7 +1,18 @@
 {
-  "generado": "2026-08-05T17:00:25.826Z",
-  "total": 4,
+  "generado": "2026-08-05T17:08:05.801Z",
+  "total": 5,
   "dashboards": [
+    {
+      "titulo": "Instructivo Boleta Digital",
+      "categoria": "Varios",
+      "fecha": "2026-07-24",
+      "descripcion": "Guía paso a paso para descargar tu boleta digital",
+      "tags": [
+        "Instructivo",
+        "Boleta Digital"
+      ],
+      "ruta": "Reportes/2026/Julio/Varios/instructivo-boleta-digital.html"
+    },
     {
       "titulo": "Zona 77",
       "categoria": "Zonas",
