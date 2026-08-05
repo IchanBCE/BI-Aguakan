@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOMBRE DEL DASHBOARD</title>
+
+<!-- ============================================================
+     PLANTILLA BASE — _plantilla/dashboard-base.html
+
+     Cómo usarla:
+     1. Copia este archivo dentro de la carpeta correcta, ej:
+        Reportes/2026/Septiembre/Zonas/tu-dashboard.html
+     2. Cambia el <title> y el bloque de metadatos de abajo.
+     3. Cambia el texto e ícono de categoría en el <header>
+        (busca "AJUSTA AQUÍ").
+     4. Agrega tu contenido real dentro de <main class="dash-content">.
+
+     Importante: este archivo asume que vive 4 niveles debajo de
+     la raíz del repo (Reportes/Año/Mes/Categoría/archivo.html).
+     Si respetas esa estructura, no necesitas tocar las rutas
+     "../../../../" — ya apuntan al lugar correcto.
+     ============================================================ -->
+
+<script type="application/json" id="meta">
+{
+  "titulo": "NOMBRE DEL DASHBOARD",
+  "categoria": "Zonas",
+  "fecha": "AAAA-MM-DD",
+  "descripcion": "Descripción corta de una línea",
+  "tags": ["tag1", "tag2"]
+}
+</script>
+
+<link rel="stylesheet" href="../../../../assets/style.css">
+</head>
+<body>
+
+<!-- ===== Barra superior compartida — no necesita casi ajustes ===== -->
+<header class="dash-header">
+  <a class="dash-header-brand" href="../../../../index.html">
+    <img src="../../../../assets/logo-icono.png" alt="Aguakan">
+    <span>AGUAKAN</span>
+  </a>
+
+  <div class="dash-header-info">
+    <!-- AJUSTA AQUÍ: cambia "cat-zonas" por cat-saldos / cat-convenios / cat-varios según corresponda -->
+    <span class="dash-header-cat cat-zonas">Zonas</span>
+    <!-- AJUSTA AQUÍ: mismo título que pusiste arriba en el <title> y en "titulo" del bloque de metadatos -->
+    <h1 class="dash-header-title">NOMBRE DEL DASHBOARD</h1>
+  </div>
+
+  <a class="dash-header-back" href="../../../../index.html">← Inicio</a>
+</header>
+
+<!-- ===== Aquí va el contenido real de tu dashboard ===== -->
+<main class="dash-content">
+
+  <p>Reemplaza este contenido con tu dashboard: gráficas, tablas, texto, lo que necesites.</p>
+
+</main>
+
+</body>
+</html>
