@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contacto — BI Aguakan</title>
+
+<!-- ============================================================
+     contacto.html
+     Página independiente, NO es un dashboard: no lleva bloque de
+     metadatos, así que el robot de la Fase 3 la ignora por
+     completo y nunca aparece en la lista de dashboards.
+     ============================================================ -->
+
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  body{
+    margin: 0;
+    min-height: 100vh;
+    background: var(--panel-bg);
+  }
+
+  main.contacto-wrap{
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 64px 24px;
+  }
+
+  .tarjeta{
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 40px 32px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(10,30,74,0.08);
+  }
+
+  .avatar{
+    width: 76px;
+    height: 76px;
+    margin: 0 auto 18px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--navy-mid), var(--teal));
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display, var(--font-body));
+    font-size: 26px;
+    font-weight: 800;
+  }
+
+  .nombre{
+    font-family: var(--font-body);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin: 0 0 4px;
+  }
+
+  .puesto{
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0 0 28px;
+  }
+
+  .datos{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .dato{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--panel-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+    text-align: left;
+    text-decoration: none;
+    color: var(--text-dark);
+    transition: transform .12s ease, box-shadow .12s ease;
+  }
+
+  .dato:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(10,30,74,0.08);
+  }
+
+  .dato .icono{
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #fff;
+  }
+
+  .dato.correo .icono{ background: var(--blue-bright); }
+  .dato.whatsapp .icono{ background: #25D366; }
+  .dato.telefono .icono{ background: var(--navy-mid); }
+
+  .dato .texto{ min-width: 0; }
+
+  .dato .label{
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: .05em;
+  }
+
+  .dato .valor{
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+</style>
+</head>
+<body>
+
+<header class="dash-header">
+  <a class="dash-header-brand" href="index.html">
+    <img src="assets/logo-icono.png" alt="Aguakan">
+    <span>AGUAKAN</span>
+  </a>
+  <div class="dash-header-info">
+    <h1 class="dash-header-title">Contacto</h1>
+  </div>
+  <a class="dash-header-back" href="index.html">← Inicio</a>
+</header>
+
+<main class="contacto-wrap">
+  <div class="tarjeta">
+    <div class="avatar">IC</div>
+    <p class="nombre">Isaac Chan</p>
+    <p class="puesto">Analista Comercial</p>
+
+    <div class="datos">
+      <a class="dato correo" href="mailto:ichan@aguakan.com">
+        <span class="icono">✉</span>
+        <span class="texto">
+          <span class="label">Correo</span>
+          <span class="valor">ichan@aguakan.com</span>
+        </span>
+      </a>
+
+      <a class="dato whatsapp" href="https://wa.me/529982997373" target="_blank" rel="noopener">
+        <span class="icono">💬</span>
+        <span class="texto">
+          <span class="label">WhatsApp</span>
+          <span class="valor">998 299 7373</span>
+        </span>
+      </a>
+
+      <a class="dato telefono" href="tel:+529982997373">
+        <span class="icono">☎</span>
+        <span class="texto">
+          <span class="label">Teléfono</span>
+          <span class="valor">998 299 7373</span>
+        </span>
+      </a>
+    </div>
+  </div>
+</main>
+
+</body>
+</html>
